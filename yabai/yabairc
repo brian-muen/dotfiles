@@ -4,23 +4,31 @@ sudo -n yabai --load-sa 2>/dev/null || true
 # Set the defaul tiling option to bsp (floating also available)
 yabai -m config layout bsp
 
-# Label the first two macOS Spaces so yabai can target them by purpose.
+# Label macOS Spaces so yabai can target them by purpose.
 # Make sure you have at least five macOS Spaces in Mission Control.
-yabai -m space 1 --label arc
-yabai -m space 2 --label cursor
-yabai -m space 3 --label terminal
+yabai -m space 1 --label _space_1
+yabai -m space 2 --label _space_2
+yabai -m space 3 --label _space_3
+yabai -m space 4 --label _space_4
+yabai -m space 5 --label _space_5
+
+yabai -m space 1 --label home
+yabai -m space 2 --label terminal
+yabai -m space 3 --label arc
 yabai -m space 4 --label files
 yabai -m space 5 --label emacs
 
 # Use stack layout for app-dedicated Spaces that should not subdivide.
-yabai -m space arc --layout stack
-yabai -m space cursor --layout stack
+yabai -m space home --layout bsp
 yabai -m space terminal --layout bsp
+yabai -m space arc --layout stack
 yabai -m space files --layout stack
 yabai -m space emacs --layout stack
 
 # Set padding between windows
-yabai -m config top_padding    0
+# Reserve the SketchyBar height so yabai-managed fullscreen/zoomed windows
+# do not occupy the bar area.
+yabai -m config top_padding    43
 yabai -m config bottom_padding 0
 yabai -m config left_padding   0
 yabai -m config right_padding  0
@@ -69,17 +77,22 @@ yabai -m rule --add app="^java$" manage=off
 yabai -m rule --add app="^Claude$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Messages$" manage=off
+yabai -m rule --add app="^Spotify$" manage=off
+yabai -m rule --add app="^(Passwords|1Password|Bitwarden|Password Depot)$" manage=off
 yabai -m rule --add app="^Windows( App)?$" manage=off
 
 # Route main work apps to dedicated macOS Spaces.
-yabai -m rule --add app="^Arc$" space=arc
-yabai -m rule --add app="^Cursor$" space=cursor
-yabai -m rule --add app="^Ghostty$" space=terminal
+yabai -m rule --add app="^Arc$" space=3
+yabai -m rule --add app="^Cursor$" space=home
+yabai -m rule --add app="^Ghostty$" title="^Lain Matrix$" space=1 manage=off grid=24:24:2:7:6:5
+yabai -m rule --add app="^Ghostty$" title="^Lain Clock$" space=1 manage=off grid=24:24:8:7:8:5
+yabai -m rule --add app="^Ghostty$" title="^Lain Shell$" space=1 manage=off grid=24:24:2:12:14:9
+yabai -m rule --add app="^(Ghostty|Terminal|iTerm2|kitty|WezTerm|Alacritty)$" space=terminal
 yabai -m rule --add app="^Emacs$" space=emacs
 yabai -m rule --add app="^Preview$" space=files
 
 # Jankyborders
-borders active_color=0xffc4a7e7 inactive_color=0xff6e6a86 width=5.0 hidpi=on
+borders active_color=0xffff7a99 inactive_color=0xff4d4d4d width=5.0 hidpi=on
 
 # Add padding for Sketchybar on the main display only
 yabai -m config external_bar main:43:0

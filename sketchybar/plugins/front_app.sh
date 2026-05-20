@@ -6,5 +6,8 @@
 # https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
 
 if [ "$SENDER" = "front_app_switched" ]; then
-  sketchybar --animate tanh 10 --set "$NAME" label="$INFO" icon="$($CONFIG_DIR/plugins/icon_map.sh "$INFO")"
+  sketchybar --animate tanh 10 --set "$NAME" \
+    label="$INFO" \
+    icon="$($CONFIG_DIR/plugins/icon_map.sh "$INFO")" \
+    background.drawing=on
 fi

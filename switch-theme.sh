@@ -26,20 +26,20 @@ case "$MODE" in
         sketchybar --reload
 
         # Starship
-        sed -i '' 's/^palette = .*/palette = "rose-pine"/' "$STARSHIP_CONFIG"
+        sed -i '' 's/^palette = .*/palette = "lain"/' "$STARSHIP_CONFIG"
 
         # Terminal apps
-        [ -f "$CONFIG/btop/btop.conf" ] && sed -i '' 's/^color_theme = .*/color_theme = "rose-pine"/' "$CONFIG/btop/btop.conf"
+        [ -f "$CONFIG/btop/btop.conf" ] && sed -i '' 's/^color_theme = .*/color_theme = "lain"/' "$CONFIG/btop/btop.conf"
         [ -f "$CONFIG/fastfetch/rose-pine.jsonc" ] && cp "$CONFIG/fastfetch/rose-pine.jsonc" "$CONFIG/fastfetch/config.jsonc"
 
         # Fish
         fish -c 'fish_config theme choose "Rosé Pine"' 2>/dev/null
-        [ -f "$FISH_FROZEN_THEME" ] && sed -i '' 's/^set --global fish_color_command .*/set --global fish_color_command c4a7e7/' "$FISH_FROZEN_THEME"
+        [ -f "$FISH_FROZEN_THEME" ] && sed -i '' 's/^set --global fish_color_command .*/set --global fish_color_command ff7a99/' "$FISH_FROZEN_THEME"
 
         # JankyBorders
-        sed -i '' 's/^borders active_color=.*/borders active_color=0xffc4a7e7 inactive_color=0xff6e6a86 width=5.0 hidpi=on/' "$CONFIG/yabai/yabairc"
+        sed -i '' 's/^borders active_color=.*/borders active_color=0xffff7a99 inactive_color=0xff4d4d4d width=5.0 hidpi=on/' "$CONFIG/yabai/yabairc"
         pkill -x borders 2>/dev/null; sleep 0.2
-        nohup /opt/homebrew/bin/borders active_color=0xffc4a7e7 inactive_color=0xff6e6a86 width=5.0 hidpi=on >/dev/null 2>&1 &
+        nohup /opt/homebrew/bin/borders active_color=0xffff7a99 inactive_color=0xff4d4d4d width=5.0 hidpi=on >/dev/null 2>&1 &
         ;;
 
     light)
@@ -48,19 +48,19 @@ case "$MODE" in
         sketchybar --reload
 
         # Starship
-        sed -i '' 's/^palette = .*/palette = "rose-pine-dawn"/' "$STARSHIP_CONFIG"
+        sed -i '' 's/^palette = .*/palette = "lain"/' "$STARSHIP_CONFIG"
 
         # Terminal apps
-        [ -f "$CONFIG/btop/btop.conf" ] && sed -i '' 's/^color_theme = .*/color_theme = "rose-pine-dawn"/' "$CONFIG/btop/btop.conf"
+        [ -f "$CONFIG/btop/btop.conf" ] && sed -i '' 's/^color_theme = .*/color_theme = "lain"/' "$CONFIG/btop/btop.conf"
         [ -f "$CONFIG/fastfetch/rose-pine-dawn.jsonc" ] && cp "$CONFIG/fastfetch/rose-pine-dawn.jsonc" "$CONFIG/fastfetch/config.jsonc"
 
         # Fish
         fish -c 'fish_config theme choose "Rosé Pine Dawn"' 2>/dev/null
-        [ -f "$FISH_FROZEN_THEME" ] && sed -i '' 's/^set --global fish_color_command .*/set --global fish_color_command 907aa9/' "$FISH_FROZEN_THEME"
+        [ -f "$FISH_FROZEN_THEME" ] && sed -i '' 's/^set --global fish_color_command .*/set --global fish_color_command ff8ba6/' "$FISH_FROZEN_THEME"
 
         # JankyBorders
-        sed -i '' 's/^borders active_color=.*/borders active_color=0xff575279 inactive_color=0xff9893a5 width=5.0 hidpi=on/' "$CONFIG/yabai/yabairc"
+        sed -i '' 's/^borders active_color=.*/borders active_color=0xffff8ba6 inactive_color=0xff4d4d4d width=5.0 hidpi=on/' "$CONFIG/yabai/yabairc"
         pkill -x borders 2>/dev/null; sleep 0.2
-        nohup /opt/homebrew/bin/borders active_color=0xff575279 inactive_color=0xff9893a5 width=5.0 hidpi=on >/dev/null 2>&1 &
+        nohup /opt/homebrew/bin/borders active_color=0xffff8ba6 inactive_color=0xff4d4d4d width=5.0 hidpi=on >/dev/null 2>&1 &
         ;;
 esac

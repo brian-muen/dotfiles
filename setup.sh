@@ -53,7 +53,12 @@ fish -c "fisher update"
 # ── Script permissions ────────────────────────────────────────────────────────
 echo "--- Script permissions ---"
 chmod +x "$HOME/.config/switch-theme.sh"
+[ -f "$HOME/.dotfiles/set-lain-wallpaper.sh" ] && chmod +x "$HOME/.dotfiles/set-lain-wallpaper.sh"
 find "$HOME/.config/sketchybar/plugins" -type f -name "*.sh" -exec chmod +x {} \;
+
+if [ ! -e "$HOME/.config/assets" ]; then
+    ln -s "$HOME/.dotfiles/assets" "$HOME/.config/assets"
+fi
 
 # ── Yabai scripting addition sudoers entry ────────────────────────────────────
 echo "--- Yabai scripting addition ---"
@@ -105,7 +110,7 @@ echo ""
 echo "1. SIP must be partially disabled for yabai's scripting addition: https://github.com/asmvik/yabai/wiki/Disabling-System-Integrity-Protection"
 echo "   After each 'brew upgrade yabai', re-run the sudoers block in this script"
 echo ""
-echo "2. The automatic theme switcher follows your system appearance, but it does not change the wallpaper."
+echo "2. The automatic theme switcher follows your system appearance. To set a Lain wallpaper, run ~/.dotfiles/set-lain-wallpaper.sh"
 echo ""
 echo "3. Uninstalling the rice is a manual process. You will need to remove the installed packages, the LaunchAgent, and any configuration files you no longer want."
 echo ""

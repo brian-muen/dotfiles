@@ -7,6 +7,12 @@ sketchybar --remove date 2>/dev/null
 sketchybar --remove calendar 2>/dev/null
 sketchybar --remove weather 2>/dev/null
 sketchybar --remove apple 2>/dev/null
+sketchybar --remove network 2>/dev/null
+sketchybar --remove front_app 2>/dev/null
+sketchybar --remove space_watcher 2>/dev/null
+for sid in 1 2 3 4 5 6 7 8 9 10; do
+  sketchybar --remove space.$sid 2>/dev/null
+done
 
 # General Bar Properties
 sketchybar --bar position=top \
@@ -29,53 +35,9 @@ sketchybar --default \
            label.padding_left=6 \
            label.padding_right=10 \
            background.color="$COLOR_BG" \
-           background.corner_radius=8 \
+           background.corner_radius=15 \
            background.height=30 \
            blur_radius=30
-
-# --- Items on the right ---
-
-# Calendar pill
-sketchybar --add item calendar right \
-           --set calendar icon= \
-                           icon.drawing=on \
-                           icon.font="JetBrainsMono Nerd Font:Regular:15.0" \
-                           icon.color="$COLOR_IRIS" \
-                           label="$(date +'%a %d %b  %I:%M %p')" \
-                           label.color="$COLOR_IRIS" \
-                           background.drawing=on \
-                           background.color="$COLOR_BG" \
-                           update_freq=1 \
-                           script="$PLUGIN_DIR/date.sh"
-
-# Volume level
-sketchybar --add item volume right \
-           --set volume icon.color="$COLOR_PINE" \
-                        icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
-                        label.color="$COLOR_PINE" \
-                        script="$PLUGIN_DIR/volume.sh" \
-           --subscribe volume volume_change
-
-# Battery level
-sketchybar --add item battery right \
-           --set battery icon.color="$COLOR_GOLD" \
-                         icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
-                         label.color="$COLOR_GOLD" \
-                         update_freq=10 \
-                         script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery system_woke power_source_change
-
-# Weather
-# sketchybar --add item weather right \
-#            --set weather script="$PLUGIN_DIR/weather.sh" \
-#                          update_freq=600 \
-#                          icon.drawing=on \
-#                          icon.font="SF Symbols:Regular:16.0" \
-#                          icon.color="$COLOR_FOAM" \
-#                          label.color="$COLOR_FOAM" \
-#                          label.padding_left=10 \
-#                          label.padding_right=10 \
-#            --subscribe weather system_woke
 
 # --- Items on the left ---
 
@@ -85,9 +47,10 @@ sketchybar --add item apple left \
                        label= \
                        label.drawing=on \
                        label.font="SF Pro:Bold:18.0" \
-                       label.color="$COLOR_ROSE" \
+                       label.color="$COLOR_LOVE" \
                        label.width=24 \
                        label.align=center \
+                       label.y_offset=-2 \
                        label.padding_left=12 \
                        label.padding_right=12 \
                        background.drawing=on \
@@ -105,6 +68,7 @@ for sid in "${SPACE_SIDS[@]}"; do
                      label.padding_right=20 \
                      label.y_offset=-2 \
                      label.color="$COLOR_ROSE" \
+                     icon.font="JetBrainsMono Nerd Font:Bold:15.0" \
                      icon.color="$COLOR_ROSE" \
                      click_script="yabai -m space --focus $sid" \
                      script="$PLUGIN_DIR/space.sh"
@@ -116,11 +80,49 @@ sketchybar --add item space_watcher center \
            --subscribe space_watcher space_windows_change
 
 # Front app
-sketchybar --add item front_app left \
+sketchybar --add item front_app center \
            --set front_app icon.font="sketchybar-app-font:Regular:18.0" \
                            icon.color="$COLOR_LOVE" \
                            label.color="$COLOR_LOVE" \
+                           label.font="SF Pro:Bold:14.0" \
+                           label.padding_left=8 \
+                           label.padding_right=12 \
+                           background.drawing=on \
+                           background.color="$COLOR_BG" \
                            script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
+
+# --- Items on the right ---
+
+# Calendar pill
+sketchybar --add item calendar right \
+           --set calendar icon.drawing=off \
+                           label="$(date +'%a %d %b  %I:%M %p')" \
+                           label.color="$COLOR_IRIS" \
+                           background.drawing=on \
+                           background.color="$COLOR_BG" \
+                           update_freq=1 \
+                           script="$PLUGIN_DIR/date.sh"
+
+# Volume level
+sketchybar --add item volume right \
+           --set volume icon.color="$COLOR_IRIS" \
+                        icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
+                        label.color="$COLOR_IRIS" \
+                        background.drawing=on \
+                        background.color="$COLOR_BG" \
+                        script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change
+
+# Battery level
+sketchybar --add item battery right \
+           --set battery icon.color="$COLOR_IRIS" \
+                         icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
+                         label.color="$COLOR_IRIS" \
+                         background.drawing=on \
+                         background.color="$COLOR_BG" \
+                         update_freq=10 \
+                         script="$PLUGIN_DIR/battery.sh" \
+           --subscribe battery system_woke power_source_change
 
 sketchybar --update

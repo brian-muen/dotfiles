@@ -4,11 +4,14 @@
 !LICENSE
 !README.md
 !setup.sh
+!set-lain-wallpaper.sh
 !starship.toml
 !switch-theme.sh
 
 !assets/
 !assets/*
+!assets/lain/
+!assets/lain/*
 
 !btop/
 !btop/btop.conf
@@ -30,7 +33,7 @@
 !sketchybar/colors-dawn.sh
 !sketchybar/sketchybarrc
 !sketchybar/plugins/
-!sketchybar/plugins/space.sh
+!sketchybar/plugins/*.sh
 
 !yabai/
 !yabai/yabairc

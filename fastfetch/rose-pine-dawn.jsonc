@@ -1,30 +1,25 @@
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {
-        "source": "macos",
-        "color": {
-            "1": "#b4637a",
-            "2": "#d7827e",
-            "3": "#ea9d34",
-            "4": "#56949f",
-            "5": "#907aa9"
-        },
+        "source": "~/.config/assets/lain/fastfetch-lain-color.ansi",
+        "type": "file-raw",
         "padding": {
             "right": 4
         }
     },
     "display": {
-        "separator": "  ",
+        "separator": ": ",
         "color": {
-            "keys": "#907aa9",
-            "title": "#d7827e",
-            "output": "#575279",
-            "separator": "#9893a5"
+            "keys": "#ff7a99",
+            "title": "#ff7a99",
+            "output": "#f8f8f2",
+            "separator": "#f8f8f2"
         },
-        "brightColor": false,
+        "brightColor": true,
+        "showErrors": false,
         "size": {
-            "maxPrefix": "MB",
-            "ndigits": 0,
+            "maxPrefix": "GB",
+            "ndigits": 2,
             "spaceBeforeUnit": "never"
         },
         "freq": {
@@ -34,31 +29,69 @@
     },
     "modules": [
         "title",
-        "separator",
-        "os",
-        "host",
         {
-            "type": "kernel",
-            "format": "{release}"
+            "type": "publicip",
+            "url": "http://ident.me",
+            "timeout": 2000
         },
-        "uptime",
+        "separator",
+        {
+            "type": "custom",
+            "key": "OS",
+            "format": "Copland OS Enterprise"
+        },
+        {
+            "type": "custom",
+            "key": "Host",
+            "format": "NAVI"
+        },
+        {
+            "type": "command",
+            "key": "Kernel",
+            "text": "uname -r",
+            "format": "{result}"
+        },
         {
             "type": "packages",
-            "combined": true
+            "combined": false
         },
         "shell",
-        "terminal",
+        "de",
+        "wm",
+        {
+            "type": "wmtheme",
+            "key": "WM Theme"
+        },
         "cpu",
         {
-            "type": "gpu",
+            "type": "command",
             "key": "GPU",
-            "format": "{name}"
+            "text": "system_profiler SPDisplaysDataType | awk -F': ' '/Chipset Model/ { print $2; exit }'",
+            "format": "{result}"
         },
         {
-            "type": "memory",
-            "format": "{used} / {total}"
+            "type": "disk",
+            "folders": "/",
+            "format": "{size-used} / {size-total} ({size-percentage})"
+        },
+        {
+            "type": "command",
+            "key": "Uptime",
+            "text": "perl -MTime::Piece -e '$b=qx(who -b); $b=~/(\\w+\\s+\\d+\\s+\\d+:\\d+)/; $t=Time::Piece->strptime(\"$1 \".(localtime)->year,\"%b %d %H:%M %Y\"); $s=time-$t->epoch; printf \"%d days, %d hours, %d mins\\n\",$s/86400,$s/3600%24,$s/60%60'",
+            "format": "{result}"
         },
         "break",
-        "colors"
+        {
+            "type": "command",
+            "key": " ",
+            "text": "printf '\\033[48;2;0;0;0m   \\033[48;2;255;79;125m   \\033[48;2;255;156;181m   \\033[48;2;255;230;163m   \\033[48;2;77;55;64m   \\033[48;2;255;122;153m   \\033[48;2;246;182;200m   \\033[48;2;248;248;242m   \\033[0m'",
+            "format": "{result}"
+        },
+        {
+            "type": "command",
+            "key": " ",
+            "text": "printf '\\033[48;2;25;19;22m   \\033[48;2;190;97;117m   \\033[48;2;255;116;149m   \\033[48;2;255;195;165m   \\033[48;2;42;26;30m   \\033[48;2;255;137;166m   \\033[48;2;255;208;218m   \\033[48;2;255;255;250m   \\033[0m'",
+            "format": "{result}"
+        }
     ]
 }

@@ -1,6 +1,26 @@
-theme = light:Rose Pine Dawn,dark:Rose Pine
+background = #000000
+foreground = #f8f8f2
+cursor-color = #ff7a99
+selection-background = #282839
+selection-foreground = #f8f8f2
+palette = 0=#000000
+palette = 1=#ff5774
+palette = 2=#6ae98a
+palette = 3=#ffe099
+palette = 4=#ff7a99
+palette = 5=#e0b2a5
+palette = 6=#efdaa1
+palette = 7=#bfbfbf
+palette = 8=#4d4d4d
+palette = 9=#ff6580
+palette = 10=#70f893
+palette = 11=#ffe6ad
+palette = 12=#ff8ba6
+palette = 13=#e8c4bb
+palette = 14=#ffe8ac
+palette = 15=#e6e6e6
 
-background-opacity = 0.86
+background-opacity = 0.78
 background-blur = true
 
 window-padding-x = 10
