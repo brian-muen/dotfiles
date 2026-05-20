@@ -3,6 +3,11 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # Load theme colors (switched by ~/.config/switch-theme.sh)
 source "$CONFIG_DIR/colors.sh"
 
+sketchybar --remove date 2>/dev/null
+sketchybar --remove calendar 2>/dev/null
+sketchybar --remove weather 2>/dev/null
+sketchybar --remove apple 2>/dev/null
+
 # General Bar Properties
 sketchybar --bar position=top \
                height=43 \
@@ -30,17 +35,23 @@ sketchybar --default \
 
 # --- Items on the right ---
 
-# Date and time
-sketchybar --add item date right \
-           --set date icon=􀧞  \
-                      icon.color="$COLOR_IRIS" \
-                      label.color="$COLOR_IRIS" \
-                      update_freq=1 \
-                      script="$PLUGIN_DIR/date.sh"
+# Calendar pill
+sketchybar --add item calendar right \
+           --set calendar icon= \
+                           icon.drawing=on \
+                           icon.font="JetBrainsMono Nerd Font:Regular:15.0" \
+                           icon.color="$COLOR_IRIS" \
+                           label="$(date +'%a %d %b  %I:%M %p')" \
+                           label.color="$COLOR_IRIS" \
+                           background.drawing=on \
+                           background.color="$COLOR_BG" \
+                           update_freq=1 \
+                           script="$PLUGIN_DIR/date.sh"
 
 # Volume level
 sketchybar --add item volume right \
            --set volume icon.color="$COLOR_PINE" \
+                        icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
                         label.color="$COLOR_PINE" \
                         script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change
@@ -48,22 +59,40 @@ sketchybar --add item volume right \
 # Battery level
 sketchybar --add item battery right \
            --set battery icon.color="$COLOR_GOLD" \
+                         icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
                          label.color="$COLOR_GOLD" \
                          update_freq=10 \
                          script="$PLUGIN_DIR/battery.sh" \
            --subscribe battery system_woke power_source_change
 
 # Weather
-sketchybar --add item weather right \
-           --set weather script="$PLUGIN_DIR/weather.sh" \
-                         update_freq=600 \
-                         icon.drawing=off \
-                         label.color="$COLOR_FOAM" \
-                         label.padding_left=10 \
-                         label.padding_right=10 \
-           --subscribe weather system_woke
+# sketchybar --add item weather right \
+#            --set weather script="$PLUGIN_DIR/weather.sh" \
+#                          update_freq=600 \
+#                          icon.drawing=on \
+#                          icon.font="SF Symbols:Regular:16.0" \
+#                          icon.color="$COLOR_FOAM" \
+#                          label.color="$COLOR_FOAM" \
+#                          label.padding_left=10 \
+#                          label.padding_right=10 \
+#            --subscribe weather system_woke
 
 # --- Items on the left ---
+
+# Apple/menu pill
+sketchybar --add item apple left \
+           --set apple icon.drawing=off \
+                       label= \
+                       label.drawing=on \
+                       label.font="SF Pro:Bold:18.0" \
+                       label.color="$COLOR_ROSE" \
+                       label.width=24 \
+                       label.align=center \
+                       label.padding_left=12 \
+                       label.padding_right=12 \
+                       background.drawing=on \
+                       background.color="$COLOR_BG" \
+                       click_script="open -a 'System Settings'"
 
 # Space indicators
 SPACE_SIDS=(1 2 3 4 5 6 7 8 9 10)
