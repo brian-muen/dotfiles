@@ -12,6 +12,11 @@
 
 !btop/
 !btop/btop.conf
+!btop/themes/
+!btop/themes/*.theme
+
+!fastfetch/
+!fastfetch/*.jsonc
 
 !fish/
 !fish/config.fish
@@ -29,3 +34,6 @@
 
 !yabai/
 !yabai/yabairc
+
+!zsh/
+!zsh/ricing.zsh

@@ -1,15 +1,30 @@
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo -n yabai --load-sa"
+sudo -n yabai --load-sa 2>/dev/null || true
 
 # Set the defaul tiling option to bsp (floating also available)
 yabai -m config layout bsp
 
+# Label the first two macOS Spaces so yabai can target them by purpose.
+# Make sure you have at least five macOS Spaces in Mission Control.
+yabai -m space 1 --label arc
+yabai -m space 2 --label cursor
+yabai -m space 3 --label terminal
+yabai -m space 4 --label files
+yabai -m space 5 --label emacs
+
+# Use stack layout for app-dedicated Spaces that should not subdivide.
+yabai -m space arc --layout stack
+yabai -m space cursor --layout stack
+yabai -m space terminal --layout bsp
+yabai -m space files --layout stack
+yabai -m space emacs --layout stack
+
 # Set padding between windows
-yabai -m config top_padding    10
-yabai -m config bottom_padding 10
-yabai -m config left_padding   10
-yabai -m config right_padding  10
-yabai -m config window_gap     10
+yabai -m config top_padding    0
+yabai -m config bottom_padding 0
+yabai -m config left_padding   0
+yabai -m config right_padding  0
+yabai -m config window_gap     0
 
 # Turn auto balance on or off (default: off)
 # Auto balance tries to keep all windows around the same size. probably keep it off, it's janky
@@ -25,7 +40,9 @@ yabai -m config mouse_action1 move
 yabai -m config mouse_action2 resize
 
 # Set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
-yabai -m config focus_follows_mouse autoraise
+# Keep this off so floating utility windows do not disappear behind tiled windows
+# when the pointer leaves them.
+yabai -m config focus_follows_mouse off
 
 # Set mouse follows focus mode (default: off)
 yabai -m config mouse_follows_focus off
@@ -50,9 +67,19 @@ yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^java$" manage=off
 yabai -m rule --add app="^Claude$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Messages$" manage=off
+yabai -m rule --add app="^Windows( App)?$" manage=off
+
+# Route main work apps to dedicated macOS Spaces.
+yabai -m rule --add app="^Arc$" space=arc
+yabai -m rule --add app="^Cursor$" space=cursor
+yabai -m rule --add app="^Ghostty$" space=terminal
+yabai -m rule --add app="^Emacs$" space=emacs
+yabai -m rule --add app="^Preview$" space=files
 
 # Jankyborders
-borders active_color=0xff575279 inactive_color=0xff9893a5 width=5.0 hidpi=on
+borders active_color=0xffc4a7e7 inactive_color=0xff6e6a86 width=5.0 hidpi=on
 
 # Add padding for Sketchybar on the main display only
 yabai -m config external_bar main:43:0

@@ -16,10 +16,10 @@ shift + cmd + alt + ctrl - l : yabai -m window --warp east
 cmd + alt + ctrl - e : yabai -m space --balance
 
 # Focus workspaces/desktops
-cmd + alt + ctrl - 1 : yabai -m space --focus 1
-cmd + alt + ctrl - 2 : yabai -m space --focus 2
-cmd + alt + ctrl - 3 : yabai -m space --focus 3
-cmd + alt + ctrl - 4 : yabai -m space --focus 4
+cmd + alt + ctrl - 1 : yabai -m space --focus arc
+cmd + alt + ctrl - 2 : yabai -m space --focus cursor
+cmd + alt + ctrl - 3 : yabai -m space --focus terminal
+cmd + alt + ctrl - 4 : yabai -m space --focus files
 cmd + alt + ctrl - 5 : yabai -m space --focus 5
 cmd + alt + ctrl - 6 : yabai -m space --focus 6
 cmd + alt + ctrl - 7 : yabai -m space --focus 7
@@ -28,10 +28,10 @@ cmd + alt + ctrl - 9 : yabai -m space --focus 9
 cmd + alt + ctrl - 0 : yabai -m space --focus 10
 
 # Send window to a workspace and focus it
-shift + cmd + alt + ctrl - 1 : yabai -m window --space 1; yabai -m space --focus 1
-shift + cmd + alt + ctrl - 2 : yabai -m window --space 2; yabai -m space --focus 2
-shift + cmd + alt + ctrl - 3 : yabai -m window --space 3; yabai -m space --focus 3
-shift + cmd + alt + ctrl - 4 : yabai -m window --space 4; yabai -m space --focus 4
+shift + cmd + alt + ctrl - 1 : yabai -m window --space arc; yabai -m space --focus arc
+shift + cmd + alt + ctrl - 2 : yabai -m window --space cursor; yabai -m space --focus cursor
+shift + cmd + alt + ctrl - 3 : yabai -m window --space terminal; yabai -m space --focus terminal
+shift + cmd + alt + ctrl - 4 : yabai -m window --space files; yabai -m space --focus files
 shift + cmd + alt + ctrl - 5 : yabai -m window --space 5; yabai -m space --focus 5
 shift + cmd + alt + ctrl - 6 : yabai -m window --space 6; yabai -m space --focus 6
 shift + cmd + alt + ctrl - 7 : yabai -m window --space 7; yabai -m space --focus 7

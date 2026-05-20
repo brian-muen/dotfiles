@@ -8,7 +8,17 @@ for i in {1..30}; do
     sleep 2
 done
 
-source "$(dirname "$0")/../sketchybar_env"
+ENV_FILE="$(dirname "$0")/../sketchybar_env"
+if [ ! -f "$ENV_FILE" ]; then
+  sketchybar --set weather icon="􁜏" label="--"
+  exit 0
+fi
+
+source "$ENV_FILE"
+if [ -z "$API_KEY" ]; then
+  sketchybar --set weather icon="􁜏" label="--"
+  exit 0
+fi
 LOCATION_DATA=$(curl -sf "http://ip-api.com/json")
 LAT=$(echo "$LOCATION_DATA" | jq -r '.lat')
 LON=$(echo "$LOCATION_DATA" | jq -r '.lon')
@@ -16,7 +26,7 @@ URL="https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&appid
 
 DATA=$(curl -sf "$URL")
 if [ -z "$DATA" ]; then
-  sketchybar --set weather label="􁜏 "
+  sketchybar --set weather icon="􁜏" label="--"
   exit 1
 fi
 
@@ -40,4 +50,4 @@ case "$CONDITION_DESC" in
     ;;
 esac
 
-sketchybar --animate tanh 10 --set weather label="$ICON  ${TEMP}°C"
+sketchybar --animate tanh 10 --set weather icon="$ICON" label="${TEMP}°C"

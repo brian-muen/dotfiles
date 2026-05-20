@@ -1,0 +1,64 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "macos",
+        "color": {
+            "1": "#eb6f92",
+            "2": "#ebbcba",
+            "3": "#f6c177",
+            "4": "#9ccfd8",
+            "5": "#c4a7e7"
+        },
+        "padding": {
+            "right": 4
+        }
+    },
+    "display": {
+        "separator": "  ",
+        "color": {
+            "keys": "#c4a7e7",
+            "title": "#ebbcba",
+            "output": "#e0def4",
+            "separator": "#6e6a86"
+        },
+        "brightColor": false,
+        "size": {
+            "maxPrefix": "MB",
+            "ndigits": 0,
+            "spaceBeforeUnit": "never"
+        },
+        "freq": {
+            "ndigits": 3,
+            "spaceBeforeUnit": "never"
+        }
+    },
+    "modules": [
+        "title",
+        "separator",
+        "os",
+        "host",
+        {
+            "type": "kernel",
+            "format": "{release}"
+        },
+        "uptime",
+        {
+            "type": "packages",
+            "combined": true
+        },
+        "shell",
+        "terminal",
+        "cpu",
+        {
+            "type": "gpu",
+            "key": "GPU",
+            "format": "{name}"
+        },
+        {
+            "type": "memory",
+            "format": "{used} / {total}"
+        },
+        "break",
+        "colors"
+    ]
+}

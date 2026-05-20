@@ -1,7 +1,7 @@
 #!/bin/bash
 # setup.sh - sets up the system with the rice
-# Make sure to clone the repo to .config!
-# Run: bash ~/.config/setup.sh
+# Assumes this repo is linked into ~/.config from ~/.dotfiles.
+# Run: bash ~/.dotfiles/setup.sh
 
 set -e
 
@@ -11,6 +11,7 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 echo "--- Homebrew ---"
 if ! command -v brew &>/dev/null; then
     echo "Please install Homebrew first! https://brew.sh/"
+    exit 1
 fi
 
 # ── Taps ──────────────────────────────────────────────────────────────────────
@@ -23,27 +24,27 @@ echo "--- Packages ---"
 brew install \
     borders \
     btop \
+    cmatrix \
     dark-notify \
     fastfetch \
     fish \
     fisher \
+    helix \
+    browsh \
     openjdk@21 \
     sketchybar \
     starship \
+    tmux \
     yabai
 
 echo "--- Casks ---"
-brew install --cask ghostty raycast
+[ -d /Applications/Ghostty.app ] || brew install --cask ghostty
+[ -d /Applications/Raycast.app ] || brew install --cask raycast
+brew list --cask font-jetbrains-mono-nerd-font >/dev/null 2>&1 || brew install --cask font-jetbrains-mono-nerd-font
 
-# ── Fish as default shell ─────────────────────────────────────────────────────
+# ── Fish shell ────────────────────────────────────────────────────────────────
 echo "--- Fish shell ---"
-FISH_PATH="$(brew --prefix)/bin/fish"
-if ! grep -qF "$FISH_PATH" /etc/shells; then
-    echo "$FISH_PATH" | sudo tee -a /etc/shells
-fi
-if [ "$SHELL" != "$FISH_PATH" ]; then
-    chsh -s "$FISH_PATH"
-fi
+echo "Fish is installed and configured, but the login shell is left unchanged."
 
 # ── Fisher plugins (reads from fish/fish_plugins) ─────────────────────────────
 echo "--- Fisher plugins ---"
@@ -52,8 +53,7 @@ fish -c "fisher update"
 # ── Script permissions ────────────────────────────────────────────────────────
 echo "--- Script permissions ---"
 chmod +x "$HOME/.config/switch-theme.sh"
-chmod +x "$HOME/.config/fish/set-dark-theme.fish"
-chmod +x "$HOME/.config/fish/set-light-theme.fish"
+find "$HOME/.config/sketchybar/plugins" -type f -name "*.sh" -exec chmod +x {} \;
 
 # ── Yabai scripting addition sudoers entry ────────────────────────────────────
 echo "--- Yabai scripting addition ---"
