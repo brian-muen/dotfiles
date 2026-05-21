@@ -25,10 +25,10 @@ yabai -m space arc --layout stack
 yabai -m space files --layout stack
 yabai -m space emacs --layout stack
 
-# Set padding between windows
-# Reserve the SketchyBar height so yabai-managed fullscreen/zoomed windows
-# do not occupy the bar area.
-yabai -m config top_padding    43
+# Set padding between windows.
+# SketchyBar is reserved with external_bar below. Keep top_padding at zero
+# so the bar reservation is not applied twice.
+yabai -m config top_padding    0
 yabai -m config bottom_padding 0
 yabai -m config left_padding   0
 yabai -m config right_padding  0
@@ -94,7 +94,8 @@ yabai -m rule --add app="^Preview$" space=files
 # Jankyborders
 borders active_color=0xffff7a99 inactive_color=0xff4d4d4d width=5.0 hidpi=on
 
-# Add padding for Sketchybar on the main display only
-yabai -m config external_bar main:43:0
+# Add padding for SketchyBar on the main display only. The SketchyBar window is
+# 38px tall, with visible item backgrounds centered in that area.
+yabai -m config external_bar main:38:0
 # The same as above, but for all displays instead
 # yabai -m config external_bar all:43:0
