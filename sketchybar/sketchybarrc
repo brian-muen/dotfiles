@@ -9,6 +9,8 @@ sketchybar --remove weather 2>/dev/null
 sketchybar --remove apple 2>/dev/null
 sketchybar --remove network 2>/dev/null
 sketchybar --remove front_app 2>/dev/null
+sketchybar --remove volume 2>/dev/null
+sketchybar --remove battery 2>/dev/null
 sketchybar --remove space_watcher 2>/dev/null
 for sid in 1 2 3 4 5 6 7 8 9 10; do
   sketchybar --remove space.$sid 2>/dev/null
@@ -16,7 +18,7 @@ done
 
 # General Bar Properties
 sketchybar --bar position=top \
-               height=43 \
+               height=38 \
                blur_radius=30 \
                color=0x00000000 \
                display=main \
@@ -97,6 +99,8 @@ sketchybar --add item front_app center \
 # Calendar pill
 sketchybar --add item calendar right \
            --set calendar icon.drawing=off \
+                           padding_left=6 \
+                           padding_right=6 \
                            label="$(date +'%a %d %b  %I:%M %p')" \
                            label.color="$COLOR_IRIS" \
                            background.drawing=on \
@@ -108,6 +112,8 @@ sketchybar --add item calendar right \
 sketchybar --add item volume right \
            --set volume icon.color="$COLOR_IRIS" \
                         icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
+                        padding_left=6 \
+                        padding_right=6 \
                         label.color="$COLOR_IRIS" \
                         background.drawing=on \
                         background.color="$COLOR_BG" \
@@ -118,6 +124,8 @@ sketchybar --add item volume right \
 sketchybar --add item battery right \
            --set battery icon.color="$COLOR_IRIS" \
                          icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
+                         padding_left=6 \
+                         padding_right=6 \
                          label.color="$COLOR_IRIS" \
                          background.drawing=on \
                          background.color="$COLOR_BG" \
